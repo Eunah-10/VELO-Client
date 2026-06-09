@@ -1,0 +1,97 @@
+name: Auto Create PR
+on:
+  push:
+    branches-ignore:
+      - main
+      - develop
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check if PR already exists
+        id: check_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COUNT=$(gh pr list --head ${{ github.ref_name }} --state open --json number --jq 'length')
+          echo "exists=$COUNT" >> $GITHUB_OUTPUT
+      - name: Set up Python
+        if: steps.check_pr.outputs.exists == '0'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        if: steps.check_pr.outputs.exists == '0'
+        run: pip install google-genai jq
+      - name: Fetch Repository Labels
+        if: steps.check_pr.outputs.exists == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label list --json name --jq '.[].name' > labels.txt
+      - name: Generate PR Data
+        if: steps.check_pr.outputs.exists == '0'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          git log origin/main..HEAD --pretty=format:"%s%n%b" > commits.txt
+          git diff origin/main..HEAD > diff.txt
+          python .github/scripts/generate_pr_info.py > pr_info.json
+      - name: Create Pull Request
+        if: steps.check_pr.outputs.exists == '0'
+        env:
+          MINGYU_PAT: ${{ secrets.MINGYU_PERSONAL_TOKEN }}
+          SUJI_PAT: ${{ secrets.SUJI_PERSONAL_TOKEN }}
+          SONGJUNE_PAT: ${{ secrets.SONGJUNE_PERSONAL_TOKEN }}
+          BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_OBJ=$(jq 'if type=="array" then .[0] else . end' pr_info.json)
+          TITLE=$(echo "$PR_OBJ" | jq -r '.title')
+          BODY=$(echo "$PR_OBJ" | jq -r '.body')
+          AI_LABELS=$(echo "$PR_OBJ" | jq -r '.labels | join(",")')
+          
+          case "${{ github.actor }}" in
+            "Mingyu0626")
+              USER_LABEL="🍎최민규"
+              SELECT_TOKEN=$MINGYU_PAT
+              ;;
+            "sooji123")
+              USER_LABEL="🍪박수지"
+              SELECT_TOKEN=$SUJI_PAT
+              ;;
+            "helloSalmon")
+              USER_LABEL="🍯송준"
+              SELECT_TOKEN=$SONGJUNE_PAT
+              ;;
+            *)
+              USER_LABEL="${{ github.actor }}"
+              SELECT_TOKEN=$BOT_TOKEN
+              ;;
+          esac
+          
+          if [ -z "$SELECT_TOKEN" ]; then
+            SELECT_TOKEN=$BOT_TOKEN
+          fi
+          
+          if [ -z "$AI_LABELS" ]; then
+            ALL_LABELS="$USER_LABEL"
+          else
+            ALL_LABELS="$AI_LABELS,$USER_LABEL"
+          fi
+          
+          echo "$BODY" > pr_body.md
+          
+          GH_TOKEN=$SELECT_TOKEN gh pr create \
+            --base main \
+            --head ${{ github.ref_name }} \
+            --title "$TITLE" \
+            --body-file pr_body.md \
+            --label "$ALL_LABELS" \
+            --assignee "${{ github.actor }}" \
+            --draft || true
