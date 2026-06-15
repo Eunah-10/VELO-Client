@@ -47,8 +47,7 @@ jobs:
         if: steps.check_pr.outputs.exists == '0'
         env:
           MINGYU_PAT: ${{ secrets.MINGYU_PERSONAL_TOKEN }}
-          SUJI_PAT: ${{ secrets.SUJI_PERSONAL_TOKEN }}
-          SONGJUNE_PAT: ${{ secrets.SONGJUNE_PERSONAL_TOKEN }}
+          JUNBEOM_PAT: ${{ secrets.JUNBEOM_PERSONAL_TOKEN }}
           BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PR_OBJ=$(jq 'if type=="array" then .[0] else . end' pr_info.json)
@@ -61,13 +60,9 @@ jobs:
               USER_LABEL="🍎최민규"
               SELECT_TOKEN=$MINGYU_PAT
               ;;
-            "sooji123")
-              USER_LABEL="🍪박수지"
-              SELECT_TOKEN=$SUJI_PAT
-              ;;
-            "helloSalmon")
-              USER_LABEL="🍯송준"
-              SELECT_TOKEN=$SONGJUNE_PAT
+            "jbaem")
+              USER_LABEL="🍪박준범"
+              SELECT_TOKEN=$JUNBEOM_PAT
               ;;
             *)
               USER_LABEL="${{ github.actor }}"
