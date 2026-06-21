@@ -26,18 +26,18 @@ public class UI_ScaleAnimator : MonoBehaviour
     public async UniTask PlayOpenAsync(CancellationToken ct)
     {
         transform.localScale = _startScale;
-        await transform.DOScale(_targetScale, _openDuration)
+        var tween = transform.DOScale(_targetScale, _openDuration)
             .SetEase(_openEase)
-            .SetUpdate(true)
-            .ToUniTask(cancellationToken: ct);
+            .SetUpdate(true);
+        await UniTask.WaitUntil(() => !tween.IsActive() || !tween.IsPlaying(), cancellationToken: ct);
     }
 
     public async UniTask PlayCloseAsync(CancellationToken ct)
     {
         transform.localScale = _targetScale;
-        await transform.DOScale(_startScale, _closeDuration)
+        var tween = transform.DOScale(_startScale, _closeDuration)
             .SetEase(_closeEase)
-            .SetUpdate(true)
-            .ToUniTask(cancellationToken: ct);
+            .SetUpdate(true);
+        await UniTask.WaitUntil(() => !tween.IsActive() || !tween.IsPlaying(), cancellationToken: ct);
     }
 }

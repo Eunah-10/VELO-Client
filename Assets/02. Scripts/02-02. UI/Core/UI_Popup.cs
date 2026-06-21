@@ -70,6 +70,5 @@ public abstract class UI_Popup : MonoBehaviour
 
     public void OnCloseButtonClicked()
     {
-        UIManager.Instance.PopupHandler.ClosePopup(this);
     }
 }

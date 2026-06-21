@@ -34,22 +34,6 @@ public class UI_PopupHandler
         SetPopupFocusState(popup, true);
     }
 
-    public void OpenSaveSlotPopup(UI_SaveSlotPopup panel, ESlotPanelMode mode)
-    {
-        if (panel.gameObject.activeSelf)
-        {
-            return;
-        }
-
-        SetTopPopupFocusState(false);
-
-        _popups.Push(panel);
-        panel.OpenAsync(mode).Forget();
-
-        InputHandler.ChangeToUIInput();
-        SetPopupFocusState(panel, true);
-    }
-
     public void ClosePopup(UI_Popup popup)
     {
         if (_popups.TryPeek(out UI_Popup latestPopup) && latestPopup == popup)
@@ -100,10 +84,6 @@ public class UI_PopupHandler
 
     private void SetPopupFocusState(UI_Popup popup, bool state)
     {
-        if (popup != null && popup.TryGetComponent<UI_FocusController>(out var selector))
-        {
-            selector.enabled = state;
-        }
     }
 }
 
