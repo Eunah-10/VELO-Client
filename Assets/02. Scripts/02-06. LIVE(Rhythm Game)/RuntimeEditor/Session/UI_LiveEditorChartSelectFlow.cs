@@ -4,7 +4,7 @@ using UnityEngine;
 using VInspector;
 
 /// <summary>
-/// 곡 선택 → 난이도 선택 → (덮어쓰기 확인) → 채보 열기까지의 선택 구간을 전담합니다.
+/// 곡 선택 → 난이도 선택 → (기존 채보 처리 확인) → 채보 열기까지의 선택 구간을 전담합니다.
 /// 씬 진입부터의 전체 흐름은 UI_LiveEditorFlow가 관리하며, 이 클래스는 결과만 대리자로 통지합니다.
 /// </summary>
 public class UI_LiveEditorChartSelectFlow : MonoBehaviour
@@ -76,29 +76,52 @@ public class UI_LiveEditorChartSelectFlow : MonoBehaviour
     {
         _selectedDifficulty = difficulty;
 
-        bool isOverwriting = _mode == ELiveEditorChartMode.Create && _controller.ChartIO.HasChart(_selectedSongId, difficulty);
-        if (!isOverwriting)
+        bool isCreateMode = _mode == ELiveEditorChartMode.Create;
+
+        // 불러오기 흐름은 저장된 난이도만 목록에 올리므로 확인 없이 바로 엽니다.
+        bool hasExistingChart = isCreateMode && _controller.ChartIO.HasChart(_selectedSongId, difficulty);
+        if (!hasExistingChart)
         {
-            OpenEditor();
+            OpenEditor(isCreateMode);
             return;
         }
 
-        // 난이도 팝업 위에 그대로 겹쳐 띄워, 취소하면 난이도 선택으로 자연스럽게 돌아가게 합니다.
-        _confirmPopup.SetMessage($"{_selectedSongId} / {difficulty} 채보가 이미 있습니다.\n빈 채보로 덮어쓸까요?", "덮어쓰기");
-        _confirmPopup.OnConfirmed = OnOverwriteConfirmed;
-        _confirmPopup.OnCanceled = _popupPresenter.CloseLatest;
+        // 이미 채보가 있는 난이도를 만들기로 골랐으므로, 지우고 새로 시작할지 아니면 그대로 이어서 편집할지 묻습니다.
+        // 두 선택지 모두 편집으로 이어지므로 취소 쪽 문구도 무엇을 하는지 드러나게 적습니다.
+        _confirmPopup.SetMessage(
+            $"{_selectedSongId} / {difficulty} 채보가 이미 있습니다.\n기존 채보를 삭제하고 새로 만들까요?",
+            "삭제하고 새로 만들기",
+            "기존 채보 불러오기");
+        _confirmPopup.OnConfirmed = ReplaceExistingChart;
+        _confirmPopup.OnCanceled = LoadExistingChart;
         _popupPresenter.Open(_confirmPopup);
     }
 
-    private void OnOverwriteConfirmed()
+    /// <summary>
+    /// 기존 채보를 빈 채보로 바꿉니다.
+    ///
+    /// 먼저 지우지 않고 덮어쓰는 이유는 두 가지입니다.
+    /// 하나는 OpenChart가 곡 정보를 읽지 못해 중간에 실패하면 기존 채보만 사라진 채로 끝나기 때문이고,
+    /// 다른 하나는 파일을 지우면 Unity가 만든 .meta도 함께 사라져 새 파일이 다른 GUID를 받기 때문입니다.
+    /// </summary>
+    private void ReplaceExistingChart()
     {
         _popupPresenter.CloseLatest();
-        OpenEditor();
+        OpenEditor(true);
     }
 
-    private void OpenEditor()
+    /// <summary>
+    /// 새로 만들지 않기로 했으므로 기존 채보를 그대로 열어 이어서 편집합니다.
+    /// </summary>
+    private void LoadExistingChart()
     {
-        if (!_controller.OpenChart(_selectedSongId, _selectedDifficulty, _mode == ELiveEditorChartMode.Create))
+        _popupPresenter.CloseLatest();
+        OpenEditor(false);
+    }
+
+    private void OpenEditor(bool isNew)
+    {
+        if (!_controller.OpenChart(_selectedSongId, _selectedDifficulty, isNew))
         {
             return;
         }
