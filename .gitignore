@@ -73,3 +73,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# 기획서 원본 PDF (용량 문제로 제외, 추출 텍스트만 추적)
+/docs/기획서/*.pdf
