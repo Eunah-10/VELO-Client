@@ -5,10 +5,9 @@ using System.Collections.Generic;
 ///
 /// 기획서 3-K-2는 열 곳에서 "즉시 저장"을 요구합니다. 화면마다 저장을 호출하게 하면 반드시 빠뜨리므로,
 /// 상태 변경과 저장을 이 파사드 안에 묶어 누락이 구조적으로 불가능하게 만듭니다.
-/// 개별 판정과 상태 전환은 각 서비스가 담당하고, 이 클래스는 호출 순서와 저장만 책임집니다.
 ///
-/// 리듬게임 결과 처리만 예외입니다. 곡별 최고 기록은 LiveRecordService가 직접 갱신하고,
-/// 보상·기록·스케줄 완료가 한 번의 저장으로 함께 남아야 하므로 LiveResultProcessor가 저장을 맡습니다.
+/// 리듬게임 결과 처리만 예외입니다. 보상·기록·스케줄 완료가 한 번의 저장으로 함께 남아야 하므로
+/// LiveResultProcessor가 저장을 맡습니다.
 /// </summary>
 public class GameProgressService : POCOSingleton<GameProgressService>
 {
@@ -38,6 +37,35 @@ public class GameProgressService : POCOSingleton<GameProgressService>
     public List<string> GetCurrentWeekDayIds()
     {
         return MasterDataQuery.GetDayIdsByWeek(Data.CurrentWeekId);
+    }
+
+    /// <summary>
+    /// 내일 예정된 스케줄입니다. 주차의 마지막 날짜라면 빈 목록입니다.
+    /// </summary>
+    public List<ScheduleData> GetTomorrowSchedules()
+    {
+        return ScheduleProgressService.GetTomorrowSchedules(Data);
+    }
+
+    /// <summary>
+    /// 현재 주차의 순번입니다. WeekData 마스터 테이블이 따로 없어 오늘 스케줄의 WeekOrder에서 얻습니다.
+    /// 스케줄이 하나도 없으면 1주차로 봅니다.
+    /// </summary>
+    public int GetCurrentWeekOrder()
+    {
+        List<ScheduleData> schedules = GetTodaySchedules();
+
+        return 0 < schedules.Count ? schedules[0].WeekOrder : 1;
+    }
+
+    public int GetCurrentDayNumber()
+    {
+        return DayProgressService.GetDayNumber(Data, Data.CurrentDayId);
+    }
+
+    public int GetTomorrowDayNumber()
+    {
+        return DayProgressService.GetDayNumber(Data, DayProgressService.GetNextDayId(Data));
     }
 
     /// <summary>
