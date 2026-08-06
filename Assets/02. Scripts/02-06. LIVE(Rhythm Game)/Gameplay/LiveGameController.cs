@@ -14,25 +14,21 @@ public class LiveGameController : MonoBehaviour
 {
     [Foldout("Hierarchy")]
     [SerializeField]
-    private LivePlaySession _session;
-
-    [SerializeField]
     private LiveConductor _conductor;
 
     [SerializeField]
-    private LiveJudgementProcessor _judgementProcessor;
+    private LiveTrackScroller _trackScroller;
 
     [SerializeField]
     private LivePlayInput _playInput;
 
     [SerializeField]
-    private LiveCountdown _countdown;
-
-    [SerializeField]
-    private LiveResultDispatcher _resultDispatcher;
-
-    [SerializeField]
     private UI_Live _liveUI;
+
+    private LiveJudgementProcessor _judgementProcessor;
+    private LivePlaySession _session;
+    private LiveCountdown _countdown;
+    private LiveResultDispatcher _resultDispatcher;
 
     private ELiveGameState _state = ELiveGameState.Loading;
 
@@ -40,6 +36,13 @@ public class LiveGameController : MonoBehaviour
 
     private void Awake()
     {
+        _judgementProcessor = new LiveJudgementProcessor();
+        _session = new LivePlaySession(_conductor, _trackScroller, _judgementProcessor, _liveUI);
+        _countdown = new LiveCountdown(_liveUI.CountdownPanel);
+        _resultDispatcher = new LiveResultDispatcher(_judgementProcessor);
+
+        _liveUI.BindJudgement(_judgementProcessor);
+
         _playInput.OnLanePressed += PressLane;
         _playInput.OnLaneReleased += ReleaseLane;
         _judgementProcessor.OnGhostFailed += FinishPlay;
@@ -196,7 +199,7 @@ public class LiveGameController : MonoBehaviour
         // 귀신 실패가 아니라면 곡이 끝난 시점에 남아 있던 노트까지 마저 BAD로 확정하고 결과를 냅니다.
         _judgementProcessor.FlushRemainingNotes();
 
-        _resultDispatcher.Dispatch();
+        _resultDispatcher.Dispatch(this.GetCancellationTokenOnDestroy());
     }
 
     private void LoadBackScene()
