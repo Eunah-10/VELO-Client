@@ -25,7 +25,23 @@ public class StoryScriptTsvParser
     public const string COLUMN_BACKGROUND_ID = "backgroundId";
     public const string COLUMN_CHARACTER_ID = "characterId";
     public const string COLUMN_EXPRESSION_ID = "expressionId";
+
+    /// <summary>
+    /// 오른쪽 슬롯입니다. 2인 대화에서만 채우므로 대부분의 행에서 비어 있습니다.
+    /// </summary>
+    public const string COLUMN_RIGHT_CHARACTER_ID = "rightCharacterId";
+    public const string COLUMN_RIGHT_EXPRESSION_ID = "rightExpressionId";
     public const string COLUMN_ILLUSTRATION_ID = "illustrationId";
+
+    /// <summary>
+    /// 연출표의 [속도]·[디자인]·[화면 이펙트]·[사운드] 열입니다.
+    /// 기존 시트에는 없던 컬럼이라 비어 있어도 오류로 보지 않습니다(속도는 NORMAL로 떨어집니다).
+    /// </summary>
+    public const string COLUMN_TEXT_SPEED = "textSpeed";
+    public const string COLUMN_TEXT_STYLE_ID = "textStyleId";
+    public const string COLUMN_EFFECT_ID = "effectId";
+    public const string COLUMN_BGM_ID = "bgmId";
+    public const string COLUMN_SFX_ID = "sfxId";
 
     private static readonly char[] LINE_SEPARATORS = { '\n' };
 
@@ -112,9 +128,13 @@ public class StoryScriptTsvParser
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(text))
+        // 대사 없이 배경만 넘기는 컷을 허용합니다(연출표 없이 이미지만 있는 회차).
+        // 다만 아무 변화도 없는 줄은 시트의 실수이므로, 배경이나 일러스트 중 하나는 있어야 합니다.
+        if (string.IsNullOrWhiteSpace(text)
+            && string.IsNullOrEmpty(GetCell(cells, columns, COLUMN_BACKGROUND_ID))
+            && string.IsNullOrEmpty(GetCell(cells, columns, COLUMN_ILLUSTRATION_ID)))
         {
-            errors.Add($"{rowNumber}행: text가 비어 있습니다.");
+            errors.Add($"{rowNumber}행: text가 비어 있는데 배경·일러스트 지정도 없습니다.");
             return;
         }
 
@@ -139,6 +159,7 @@ public class StoryScriptTsvParser
         }
 
         string rawLineType = GetCell(cells, columns, COLUMN_LINE_TYPE);
+        string rawTextSpeed = GetCell(cells, columns, COLUMN_TEXT_SPEED);
 
         return new StoryLineData
         {
@@ -150,7 +171,14 @@ public class StoryScriptTsvParser
             BackgroundId = GetCell(cells, columns, COLUMN_BACKGROUND_ID),
             CharacterId = GetCell(cells, columns, COLUMN_CHARACTER_ID),
             ExpressionId = GetCell(cells, columns, COLUMN_EXPRESSION_ID),
+            RightCharacterId = GetCell(cells, columns, COLUMN_RIGHT_CHARACTER_ID),
+            RightExpressionId = GetCell(cells, columns, COLUMN_RIGHT_EXPRESSION_ID),
             IllustrationId = GetCell(cells, columns, COLUMN_ILLUSTRATION_ID),
+            TextSpeed = MasterDataEnum.Parse(rawTextSpeed, ETextSpeed.NORMAL, $"{storyId} {rowNumber}행"),
+            TextStyleId = GetCell(cells, columns, COLUMN_TEXT_STYLE_ID),
+            EffectId = GetCell(cells, columns, COLUMN_EFFECT_ID),
+            BgmId = GetCell(cells, columns, COLUMN_BGM_ID),
+            SfxId = GetCell(cells, columns, COLUMN_SFX_ID),
         };
     }
 

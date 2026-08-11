@@ -45,13 +45,22 @@ public class StoryScriptValidator
             StoryLineData line = script.Lines[i];
             string location = $"{script.StoryId} {i + 1}번째 줄";
 
-            if (string.IsNullOrWhiteSpace(line.Text))
+            // 빈 대사는 배경만 넘기는 컷이라 오류가 아닙니다.
+            // 실수로 비운 줄은 가져오기 단계(StoryScriptTsvParser)에서 걸러집니다.
+            // 여기서는 배경이 캐리오버로 이미 채워져 있어 "아무 일도 하지 않는 줄"을 가려낼 수 없습니다.
+            if (string.IsNullOrWhiteSpace(line.Text) && line.LineType != ELineType.NARRATION)
             {
-                report.AddError($"[대본] {location}의 대사가 비어 있습니다.");
+                report.AddError($"[대본] {location}이 {line.LineType}인데 대사가 비어 있습니다.");
             }
 
             ValidateSpeaker(provider, line, location, report);
-            ValidateExpression(provider, line, location, report);
+            ValidateExpression(provider, line.CharacterId, line.ExpressionId, location, report);
+            ValidateExpression(provider, line.RightCharacterId, line.RightExpressionId, $"{location}(오른쪽)", report);
+
+            if (!string.IsNullOrEmpty(line.CharacterId) && line.CharacterId == line.RightCharacterId)
+            {
+                report.AddError($"[대본] {location}의 좌우 슬롯에 같은 인물({line.CharacterId})이 배치되어 있습니다.");
+            }
         }
     }
 
@@ -81,23 +90,27 @@ public class StoryScriptValidator
         }
     }
 
-    private void ValidateExpression(MasterDataProvider provider, StoryLineData line, string location, MasterDataValidationReport report)
+    /// <summary>
+    /// 슬롯 한 쪽의 캐릭터와 표정을 검사합니다. 좌우가 같은 규칙을 쓰므로 슬롯을 인자로 받습니다.
+    /// </summary>
+    private void ValidateExpression(MasterDataProvider provider, string characterId, string expressionId,
+        string location, MasterDataValidationReport report)
     {
-        if (string.IsNullOrEmpty(line.ExpressionId) || string.IsNullOrEmpty(line.CharacterId))
+        if (string.IsNullOrEmpty(expressionId) || string.IsNullOrEmpty(characterId))
         {
             return;
         }
 
-        if (!provider.TryGetCharacter(line.CharacterId, out CharacterData character))
+        if (!provider.TryGetCharacter(characterId, out CharacterData character))
         {
-            report.AddError($"[대본] {location}의 등장 캐릭터 '{line.CharacterId}'를 characters.json에서 찾을 수 없습니다.");
+            report.AddError($"[대본] {location}의 등장 캐릭터 '{characterId}'를 characters.json에서 찾을 수 없습니다.");
             return;
         }
 
         // 표정이 목록에 없으면 기본 이미지로 대체되므로(기획서 3-L) 진행은 막히지 않습니다. 경고로 둡니다.
-        if (!character.ExpressionIds.Contains(line.ExpressionId))
+        if (!character.ExpressionIds.Contains(expressionId))
         {
-            report.AddWarning($"[대본] {location}의 표정 '{line.ExpressionId}'이 {line.CharacterId}의 표정 목록에 없습니다.");
+            report.AddWarning($"[대본] {location}의 표정 '{expressionId}'이 {characterId}의 표정 목록에 없습니다.");
         }
     }
 }
