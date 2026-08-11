@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 661f50e7cd0235e419f20e19f9a82939
+guid: 9c42b01429d5aa64ca1feeec2e1e9b8c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1108002767129433001
-    second: Image_MusicSelect_ChapterButton_Selected_0
+      213: -3150000780816207522
+    second: Image_MusicSelect_SongSlot_Empty_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Image_MusicSelect_ChapterButton_Selected_0
+      name: Image_MusicSelect_SongSlot_Empty_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 110
+        width: 764
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a356e075aa606f00800000000000000
-      internalID: 1108002767129433001
+      spriteID: e513f31baf2f844d0800000000000000
+      internalID: -3150000780816207522
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Image_MusicSelect_ChapterButton_Selected_0: 1108002767129433001
+      Image_MusicSelect_SongSlot_Empty_0: -3150000780816207522
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

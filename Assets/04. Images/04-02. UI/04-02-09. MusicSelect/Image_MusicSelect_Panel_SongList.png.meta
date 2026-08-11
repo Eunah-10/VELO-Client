@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b122a84cbbcaa3c42baca6fd5ec1c368
+guid: 33062066823781b40bd1a1de7b06b2cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8261518904405679647
-    second: Image_MusicSelect_ChapterTabBar_0
+      213: 3326715448249439673
+    second: Image_MusicSelect_Panel_SongList_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Image_MusicSelect_ChapterTabBar_0
+      name: Image_MusicSelect_Panel_SongList_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1534
-        height: 212
+        width: 770
+        height: 934
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1e56421cafc6a270800000000000000
-      internalID: 8261518904405679647
+      spriteID: 9b556b1131eda2e20800000000000000
+      internalID: 3326715448249439673
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Image_MusicSelect_ChapterTabBar_0: 8261518904405679647
+      Image_MusicSelect_Panel_SongList_0: 3326715448249439673
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
