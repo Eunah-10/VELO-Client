@@ -1,0 +1,19 @@
+{
+    "_songId": "till the end",
+    "_title": "Till the end",
+    "_bpm": 140.0,
+    "_audioFilePath": "audio.mp3",
+    "_composer": "PROJECT: VELO",
+    "_duration": 146.80799865722657,
+    "_coverImagePath": "",
+    "_chartEntries": [
+        {
+            "Difficulty": 1,
+            "Metadata": {
+                "_chartFilePath": "till the end_NORMAL.json",
+                "_level": 1,
+                "_totalNoteCount": 328
+            }
+        }
+    ]
+}
