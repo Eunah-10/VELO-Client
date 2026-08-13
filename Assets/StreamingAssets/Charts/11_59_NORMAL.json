@@ -461,13 +461,6 @@
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "143d9e68-7898-4594-a04e-4e0ba456d05b",
-            "_timeMs": 54524,
-            "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
             "_noteId": "176b5216-6e74-4f97-91bd-d2f9c3451251",
             "_timeMs": 55238,
             "_lane": 4,
@@ -720,69 +713,6 @@
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "ddebc7c7-1cca-44ab-801b-47a66058c192",
-            "_timeMs": 74762,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "5d753837-2736-43d0-996e-9bd572a7f193",
-            "_timeMs": 76667,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "987c30bf-b681-4a19-8704-d4fa8f98040a",
-            "_timeMs": 77143,
-            "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "bb58d220-47a2-4df1-a63d-b669927a38b6",
-            "_timeMs": 77619,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "69da0d83-ea73-4860-8f88-426555717d6f",
-            "_timeMs": 78095,
-            "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "807f57e6-65eb-409d-80b8-d6669e3f991c",
-            "_timeMs": 78571,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "f62f649f-3f27-4901-a2cf-67f1d5edde02",
-            "_timeMs": 79048,
-            "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "4046c0a3-0a19-4377-b8ff-4074d90db6ed",
-            "_timeMs": 79524,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "ee18d48f-0394-4e83-b6bc-84f9627af377",
-            "_timeMs": 80000,
-            "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
             "_noteId": "3291d22f-4037-4e63-aa2e-462d16424d96",
             "_timeMs": 80476,
             "_lane": 1,
@@ -835,27 +765,6 @@
             "_noteId": "0ceb1eac-b32a-4ddd-acee-fa2ad3546f96",
             "_timeMs": 83810,
             "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "2fbab4ec-9428-423a-aa13-faf6b5b88e99",
-            "_timeMs": 85000,
-            "_lane": 1,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "6dd73ace-da7f-4cba-88df-a9eb2bc18621",
-            "_timeMs": 85238,
-            "_lane": 1,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "07aa7140-a44d-418d-a0f0-9b14765a32ef",
-            "_timeMs": 85714,
-            "_lane": 1,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
@@ -1399,23 +1308,9 @@
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "311a3312-a55b-4519-9604-cdc4f40c768a",
-            "_timeMs": 123571,
-            "_lane": 5,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
             "_noteId": "cec8d0cb-54f4-4866-b89a-6bef9df2ad2a",
             "_timeMs": 124524,
             "_lane": 2,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "2dc24f10-773f-424a-a8a6-6b19dbbe988f",
-            "_timeMs": 125476,
-            "_lane": 5,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
@@ -1653,13 +1548,6 @@
         {
             "_noteId": "f68874d9-b2fb-41ae-8fe2-dcb59e004c41",
             "_timeMs": 147619,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
-            "_noteId": "4352a5d7-460c-42b8-913f-1fd2789c4795",
-            "_timeMs": 148095,
             "_lane": 4,
             "_noteType": 0,
             "_holdDurationMs": 0
@@ -2218,13 +2106,6 @@
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "c5cd0e4c-189a-4ac7-b92b-871067727828",
-            "_timeMs": 187381,
-            "_lane": 4,
-            "_noteType": 0,
-            "_holdDurationMs": 0
-        },
-        {
             "_noteId": "7b27cfab-1d12-4931-84a1-b5b121203a89",
             "_timeMs": 187619,
             "_lane": 5,
@@ -2337,45 +2218,171 @@
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "c14ac795-c6c1-4b93-b087-f05f548897f3",
-            "_timeMs": 195238,
+            "_noteId": "63dd5986-f415-4685-af64-986b1468a7b8",
+            "_timeMs": 54286,
             "_lane": 5,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "0e6e1b63-2d8f-45ed-a5a5-b562a1109af4",
-            "_timeMs": 195714,
+            "_noteId": "e7cb5397-724e-42f6-ab58-2b475fe7a99c",
+            "_timeMs": 73333,
+            "_lane": 3,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "15afe487-91cf-43ff-9770-3a26d57012d0",
+            "_timeMs": 73810,
+            "_lane": 1,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "f5b8b763-69e4-4815-8444-a4952ad90564",
+            "_timeMs": 74762,
             "_lane": 4,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "3a212c1e-11d1-4aa1-a27a-0b506153af15",
-            "_timeMs": 196190,
+            "_noteId": "1b488fa4-d95c-47b7-9acf-c5690a5d5915",
+            "_timeMs": 75238,
             "_lane": 5,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "7ac6b5d1-3081-4298-8b7e-4d9aac32f9a7",
-            "_timeMs": 196905,
+            "_noteId": "7ed089fe-8677-4595-a8b9-f0216a50e3d8",
+            "_timeMs": 75714,
             "_lane": 4,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "cfb78b90-8eec-43bb-9142-9f6a9b03a326",
-            "_timeMs": 197143,
+            "_noteId": "ac068286-115d-4d6d-9709-175ce38d5894",
+            "_timeMs": 76667,
+            "_lane": 4,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "9714f8ed-0b2d-45e7-b2b1-dfb89ba7c7f3",
+            "_timeMs": 77143,
             "_lane": 5,
             "_noteType": 0,
             "_holdDurationMs": 0
         },
         {
-            "_noteId": "fd90f47c-e97d-4aa1-841b-2b4e5ef26e74",
-            "_timeMs": 197619,
+            "_noteId": "23f0f143-453e-4dcb-a95e-de8d24ab608e",
+            "_timeMs": 77619,
             "_lane": 4,
             "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "8fd733fb-76f0-4338-bf04-176ffd097745",
+            "_timeMs": 78095,
+            "_lane": 5,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "c527360a-5456-43a5-9d8f-3e5381d187de",
+            "_timeMs": 78571,
+            "_lane": 4,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "441ed24c-21a6-4f3d-8f6d-68d64c4fa1e8",
+            "_timeMs": 79048,
+            "_lane": 5,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "8be78f9e-4df1-4c28-a19a-5742052db420",
+            "_timeMs": 79524,
+            "_lane": 4,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "b4a072cd-1bee-45db-bd36-571c9fee1d55",
+            "_timeMs": 80000,
+            "_lane": 5,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "6019c0e8-6e21-49ff-9f66-20fa94f742a7",
+            "_timeMs": 76190,
+            "_lane": 5,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "416166a9-2508-48e8-b107-4582444fd8d3",
+            "_timeMs": 84762,
+            "_lane": 1,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "a314ba11-2908-4d66-904b-8f193682afc2",
+            "_timeMs": 85238,
+            "_lane": 1,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "137a34f1-e5c9-4c59-a395-b47fb9e0bdae",
+            "_timeMs": 85714,
+            "_lane": 1,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "03538c41-d654-4ebe-b2e2-6fd7e952c531",
+            "_timeMs": 123333,
+            "_lane": 5,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "2f204fc5-ee89-467c-92e6-88e0c99f106c",
+            "_timeMs": 125238,
+            "_lane": 5,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "f65eccb1-9147-4cf3-9bdd-9aa74b5e3d00",
+            "_timeMs": 154286,
+            "_lane": 4,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "9353e4f4-f937-4ed7-bc0e-952ed485f152",
+            "_timeMs": 148333,
+            "_lane": 4,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "e2da06d6-3911-41a8-818e-936c95d54e33",
+            "_timeMs": 187143,
+            "_lane": 4,
+            "_noteType": 0,
+            "_holdDurationMs": 0
+        },
+        {
+            "_noteId": "9ca6f231-dd39-42e3-aac4-f4b04db1da09",
+            "_timeMs": 194762,
+            "_lane": 6,
+            "_noteType": 1,
             "_holdDurationMs": 0
         }
     ]
